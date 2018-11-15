@@ -6,34 +6,50 @@ public class MainCubeBehaver : MonoBehaviour {
 
     public float JampPower;
     public float GravityPower;
+    public cameraBehaver cameraBehaver;
 
     private CharacterController controller;
     private Vector3 moveDirection;
     private Vector3 mousePosition;
-    private Camera camera;
 
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<CharacterController>();
-        camera = GetComponent<Camera>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+
         mousePosition = Input.mousePosition;
-        //if (controller.isGrounded)
+        Vector3 t = Camera.main.ScreenToWorldPoint(mousePosition);
+        t.z = 0f;
+
+        if (Input.GetMouseButton(0))
         {
-            //if (Input.GetMouseButton(0))
-            //{
-            //    moveDirection.y = JampPower;
-            //}
-            if (Input.GetMouseButton(0))
+            
+            if (controller.isGrounded)
             {
-                transform.position = camera.ScreenToWorldPoint(mousePosition);
+                float A = transform.position.x;
+                float B = transform.position.y;
+                float a = t.x;
+                float b = t.y;
+
+                float vx = (a - A) / 2;
+                float vy = (b + (2 * GravityPower) - B) / 2;
+
+                moveDirection.x = vx;
+                moveDirection.y = vy;
+            }
+            else
+            {
+                moveDirection.x = 0f;
             }
         }
 
-        //moveDirection.y -= GravityPower * Time.deltaTime;
-        //controller.Move(moveDirection * Time.deltaTime);
-	}
+        //Debug.Log(cameraBehaver.GetMousePosition());
+        //transform.position = cameraBehaver.GetMousePosition();
+        moveDirection.y -= GravityPower * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+        //transform.position = t;
+    }
 }
