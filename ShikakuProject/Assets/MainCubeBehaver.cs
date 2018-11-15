@@ -6,6 +6,7 @@ public class MainCubeBehaver : MonoBehaviour {
 
     public float JampPower;
     public float GravityPower;
+    public float JampTime;
     public cameraBehaver cameraBehaver;
 
     private CharacterController controller;
@@ -34,15 +35,11 @@ public class MainCubeBehaver : MonoBehaviour {
                 float a = t.x;
                 float b = t.y;
 
-                float vx = (a - A) / 2;
-                float vy = (b + (2 * GravityPower) - B) / 2;
+                float vx = (a - A) / JampTime;
+                float vy = (b + (GravityPower * JampTime * JampTime / 2) - B) / JampTime;
 
                 moveDirection.x = vx;
                 moveDirection.y = vy;
-            }
-            else
-            {
-                moveDirection.x = 0f;
             }
         }
 
