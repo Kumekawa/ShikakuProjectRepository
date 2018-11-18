@@ -43,10 +43,13 @@ public class MainCubeBehaver : MonoBehaviour {
             }
         }
 
-        //Debug.Log(cameraBehaver.GetMousePosition());
-        //transform.position = cameraBehaver.GetMousePosition();
         moveDirection.y -= GravityPower * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-        //transform.position = t;
+
+
+        if (controller.isGrounded)
+        {
+            moveDirection.x = 0;
+        }
     }
 }
