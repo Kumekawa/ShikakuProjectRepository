@@ -287,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbbda84721239e49b2c3ad39268ea65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 650, y: 649, z: 0}
 --- !u!1 &681661243
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +404,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &771082115
 BoxCollider:
@@ -760,8 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JampPower: 10
-  GravityPower: 10
-  JampTime: 0.5
+  GravityPower: 30
   cameraBehaver: {fileID: 0}
 --- !u!1 &1925498776
 GameObject:
@@ -795,7 +793,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &1925498778
 BoxCollider:
