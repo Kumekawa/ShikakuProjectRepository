@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CameraBehaver.cs" />
+    <Compile Include="Assets\FallingCubeBehaver.cs" />
     <Compile Include="Assets\MainCubeBehaver.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/粂川叶/Documents/GitHub/ShikakuProjectRepository/ShikakuProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
