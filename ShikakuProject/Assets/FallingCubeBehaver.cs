@@ -11,6 +11,7 @@ public class FallingCubeBehaver : MonoBehaviour
 	private Vector3 moveDirection;
 	private GameObject MainCube;
 	private Vector3 MainCubePosition;
+	private Renderer Renderer;
 
 	private float zPosition;
 
@@ -20,6 +21,7 @@ public class FallingCubeBehaver : MonoBehaviour
 		controller = GetComponent<CharacterController>();
 		MainCube = GameObject.Find("MainCube");
 		MainCubePosition = GameObject.Find("MainCube").transform.position;
+		Renderer = GetComponent<Renderer>();
 	}
 
 	// Update is called once per frame
@@ -27,7 +29,7 @@ public class FallingCubeBehaver : MonoBehaviour
 	{
 		Move();
 		FixZPosition();
-
+		RandomColor();
 	}
 
 	Vector3 MoveDirection()
@@ -52,5 +54,9 @@ public class FallingCubeBehaver : MonoBehaviour
 			temp.z = 0f;
 		}
 		transform.position = temp;
+	}
+
+	void RandomColor(){
+		Renderer.material.color = new Color(Random.value, Random.value, Random.value, 255f);
 	}
 }
