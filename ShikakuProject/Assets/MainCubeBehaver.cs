@@ -64,6 +64,6 @@ public class MainCubeBehaver : MonoBehaviour {
         }
 
 
-        Debug.Log(moveDirection);
+        //Debug.Log(moveDirection);
     }
 }
