@@ -22,9 +22,6 @@ public class FallingCubeBehaver : MonoBehaviour
 	private Camera Cam;
 	//private Vector3 Position;
 
-	//画面からの離れ具合
-	int n = 1;
-
 	// Use this for initialization
 	void Start()
 	{
@@ -35,8 +32,6 @@ public class FallingCubeBehaver : MonoBehaviour
 		//CameraPosition = GameObject.Find("Main Camera").transform.position;
 		//Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		Cam = Camera.GetComponent<Camera>();
-
-		Reset(true);
 	}
 
 	// Update is called once per frame
@@ -48,7 +43,7 @@ public class FallingCubeBehaver : MonoBehaviour
 		Move();
 		FixZPosition();
 		if(CheckOutSight()){
-			Reset(true);
+			Reset();
 		}
 	}
 
@@ -65,11 +60,11 @@ public class FallingCubeBehaver : MonoBehaviour
 	void FixZPosition()
 	{
 		Vector3 temp = transform.position;
-		//if (MainCube.transform.position.y - MainCube.transform.localScale.y / 2 < transform.position.y +transform.localScale.y / 2)
+		if (MainCube.transform.position.y - MainCube.transform.localScale.y / 2 < transform.position.y +transform.localScale.y / 2)
 		{
 			temp.z = 10f;
 		}
-		//else
+		else
 		{
 			temp.z = 0f;
 		}
@@ -82,52 +77,21 @@ public class FallingCubeBehaver : MonoBehaviour
 	}
 
 	//リセット処理
-	void Reset(bool start)
+	void Reset()
 	{
 		RandomColor();
-		float x, y, z = -10f;
-		//5画面以内に再配置
-		//スタート時
-		if (start)
-		{
-			x = Camera.transform.position.x + Random.Range(-ScreenSize.x * n, ScreenSize.x * n);
-			y = Camera.transform.position.y + Random.Range(-ScreenSize.y * n, ScreenSize.y * n);
-		}
-		else
-		{
-			x = Camera.transform.position.x + ScreenSize.x * Random.Range(1, n) * (2 * Random.Range(0, 2) - 1);
-			y = Camera.transform.position.y + ScreenSize.y * Random.Range(1, n) * (2 * Random.Range(0, 2) - 1);
-		}
-		transform.position = new Vector3(x,y,z);
+		Vector3 temp = new Vector3(transform.position.x, Camera.transform.position.y + ScreenSize.y,transform.position.z);
+		transform.position = temp;
 	}
 
 	//視界から遠く離れているか判定
 	bool CheckOutSight() 
 	{
 		//下側判定
-		if (transform.position.y < Camera.transform.position.y - ScreenSize.y * n * 2) //y座標 < 画面下側10倍離れている
+		if (transform.position.y + transform.localScale.y / 2 < Camera.transform.position.y - ScreenSize.y) 
 		{
 			return true;
 		}
-		//上側判定
-		if (transform.position.y > Camera.transform.position.y + ScreenSize.y * n * 2) //y座標 > 画面上側10倍離れている
-		{
-			return true;
-		}
-		//右側判定
-		if (transform.position.x > Camera.transform.position.x + ScreenSize.x * n * 2) //x座標 > 画面右側10倍離れている
-		{
-			return true;
-		}
-		//右側判定
-		if (transform.position.x < Camera.transform.position.x - ScreenSize.x * n * 2) //x座標 < 画面左側10倍離れている
-		{
-			return true;
-		}
-
-
 		return false;
 	}
-
-	
 }
