@@ -9,6 +9,7 @@ public class MainCubeBehaver : MonoBehaviour {
     //public float JampTime;
     private float JampTime=2f;
     public CameraBehaver cameraBehaver;
+	public float MaxSpeed;
 
     private CharacterController controller;
     private Vector3 moveDirection;
@@ -53,17 +54,24 @@ public class MainCubeBehaver : MonoBehaviour {
         }
 
         moveDirection.y -= GravityPower * Time.deltaTime;
+		moveDirection.y = Mathf.Max(moveDirection.y, -MaxSpeed);
+		//Debug.Log(moveDirection.y);
+
         controller.Move(moveDirection * Time.deltaTime);
-
-
         if (controller.isGrounded)
         {
             moveDirection.x = 0;
             moveDirection.y = 0;
-
         }
 
 
         //Debug.Log(moveDirection);
     }
+
+	private void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		var name = hit.gameObject.name;
+
+		Debug.Log(name);
+	}
 }
