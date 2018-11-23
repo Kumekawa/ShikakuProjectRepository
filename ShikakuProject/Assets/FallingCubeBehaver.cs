@@ -6,8 +6,9 @@ public class FallingCubeBehaver : MonoBehaviour
 {
 
 	public float MoveSpeed;
-	public Vector3 CameraPosition;
-	public Camera Camera;
+	public GameObject Camera;
+	//public Vector3 CameraPosition;
+	//public Camera Camera;
 
 	private CharacterController controller;
 	private Vector3 moveDirection;
@@ -18,7 +19,7 @@ public class FallingCubeBehaver : MonoBehaviour
 	private float zPosition;
 	
 	private Vector3 ScreenSize;
-
+	private Camera Cam;
 	//private Vector3 Position;
 
 	// Use this for initialization
@@ -28,16 +29,17 @@ public class FallingCubeBehaver : MonoBehaviour
 		MainCube = GameObject.Find("MainCube");
 		MainCubePosition = GameObject.Find("MainCube").transform.position;
 		Renderer = GetComponent<Renderer>();
-		CameraPosition = GameObject.Find("Main Camera").transform.position;
-		Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		//CameraPosition = GameObject.Find("Main Camera").transform.position;
+		//Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		Cam = Camera.GetComponent<Camera>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		ScreenSize = new Vector3(Camera.orthographicSize * Screen.width / Screen.height,Camera.orthographicSize);
+		ScreenSize = new Vector3(Cam.orthographicSize * Screen.width / Screen.height,Cam.orthographicSize);
 
-		Debug.Log(Screen.width+":"+Screen.height);
+		//Debug.Log(Screen.width+":"+Screen.height);
 		Move();
 		FixZPosition();
 		if(CheckOutSight()){
@@ -78,7 +80,7 @@ public class FallingCubeBehaver : MonoBehaviour
 	void Reset()
 	{
 		RandomColor();
-		Vector3 temp = new Vector3(transform.position.x, CameraPosition.y + ScreenSize.y,transform.position.z);
+		Vector3 temp = new Vector3(transform.position.x, Camera.transform.position.y + ScreenSize.y,transform.position.z);
 		transform.position = temp;
 	}
 
@@ -86,9 +88,7 @@ public class FallingCubeBehaver : MonoBehaviour
 	bool CheckOutSight() 
 	{
 		//下側判定
-
-
-		if (transform.position.y + transform.localScale.y / 2 < CameraPosition.y - ScreenSize.y) 
+		if (transform.position.y + transform.localScale.y / 2 < Camera.transform.position.y - ScreenSize.y) 
 		{
 			return true;
 		}

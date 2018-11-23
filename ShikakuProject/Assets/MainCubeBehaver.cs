@@ -8,7 +8,7 @@ public class MainCubeBehaver : MonoBehaviour {
     public float GravityPower;
     //public float JampTime;
     private float JampTime=2f;
-    public cameraBehaver cameraBehaver;
+    public CameraBehaver cameraBehaver;
 
     private CharacterController controller;
     private Vector3 moveDirection;
@@ -39,7 +39,7 @@ public class MainCubeBehaver : MonoBehaviour {
                 float a = t.x;
                 float b = t.y;
                 
-                float m = (A + a) / 2;
+                //float m = (A + a) / 2;
                 float n = Mathf.Max(B, b) + 2f;
                 
                 float vy = Mathf.Sqrt((n - B) * 2 * GravityPower);
