@@ -13,11 +13,12 @@ public class MainCubeBehaver : MonoBehaviour {
     private CharacterController controller;
     private Vector3 moveDirection;
     private Vector3 mousePosition;
-    
+    private float groundSpeed;
 
 	// Use this for initialization
 	void Start () {
-        controller = GetComponent<CharacterController>();
+		groundSpeed = 0;
+		controller = GetComponent<CharacterController>();
         moveDirection = new Vector3(0f, 0f, 0f);
     }
 	
@@ -28,7 +29,8 @@ public class MainCubeBehaver : MonoBehaviour {
         Vector3 t = Camera.main.ScreenToWorldPoint(mousePosition);
         t.z = 0f;
 
-        if (Input.GetMouseButton(0))
+		
+        if (moveDirection.y <= 0 && Input.GetMouseButton(0))
         {
             
             if (controller.isGrounded)
@@ -51,19 +53,36 @@ public class MainCubeBehaver : MonoBehaviour {
                 moveDirection.y = vy;
             }
         }
+		else if (controller.isGrounded)
+		{
+			moveDirection.x = 0;
+			moveDirection.y = groundSpeed;
+		}
 
-        moveDirection.y -= GravityPower * Time.deltaTime;
+		if (groundSpeed == 0)
+		{
+			moveDirection.y -= GravityPower * Time.deltaTime;
+		}
         controller.Move(moveDirection * Time.deltaTime);
 		
 		
-		if (controller.isGrounded)
-        {
-            moveDirection.x = 0;
-            moveDirection.y = 0;
-
-        }
 
 
-        //Debug.Log(moveDirection);
+        Debug.Log(moveDirection);
     }
+
+	private void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		if(hit.gameObject.tag == "FallingQube")
+		{
+			groundSpeed = -FallingCubeBehaver.MoveSpeed;
+			//Debug.Log("Falling");
+		}
+		else
+		{
+			groundSpeed = 0;
+			//Debug.Log("Gronud");
+		}
+	}
 }
+

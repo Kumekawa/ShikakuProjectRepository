@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FallingCubeBehaver : MonoBehaviour
 {
-
+	public float Speed;
 	public static float MoveSpeed;
 	public GameObject Camera;
 	//public Vector3 CameraPosition;
@@ -25,6 +25,7 @@ public class FallingCubeBehaver : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		MoveSpeed = Speed;
 		controller = GetComponent<CharacterController>();
 		MainCube = GameObject.Find("MainCube");
 		MainCubePosition = GameObject.Find("MainCube").transform.position;
