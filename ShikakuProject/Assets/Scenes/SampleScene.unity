@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 1387880374}
   - component: {fileID: 1387880379}
   - component: {fileID: 1387880378}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FallingCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba7a0e3a9069fb4390289a57c8d9d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
   Camera: {fileID: 534669902}
 --- !u!143 &1387880379
 CharacterController:
@@ -520,7 +519,7 @@ GameObject:
   - component: {fileID: 1893777203}
   - component: {fileID: 1893777208}
   - component: {fileID: 1893777207}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MainCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
