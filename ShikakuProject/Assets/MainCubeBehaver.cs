@@ -14,6 +14,7 @@ public class MainCubeBehaver : MonoBehaviour {
     private Vector3 moveDirection;
     private Vector3 mousePosition;
     private float groundSpeed;
+	private Vector3 t;
 
 	// Use this for initialization
 	void Start () {
@@ -26,46 +27,27 @@ public class MainCubeBehaver : MonoBehaviour {
 	void Update () {
 
         mousePosition = Input.mousePosition;
-        Vector3 t = Camera.main.ScreenToWorldPoint(mousePosition);
+        t = Camera.main.ScreenToWorldPoint(mousePosition);
         t.z = 0f;
 
-		
-        if (moveDirection.y <= 0 && Input.GetMouseButton(0))
-        {
-            
-            if (controller.isGrounded)
-            {
-
-                float A = transform.position.x;
-                float B = transform.position.y - transform.localScale.y / 4;
-                float a = t.x;
-                float b = t.y;
-                
-                //float m = (A + a) / 2;
-                float n = Mathf.Max(B, b) + 2f;
-                
-                float vy = Mathf.Sqrt((n - B) * 2 * GravityPower);
-                JampTime = (vy + Mathf.Sqrt(2 * GravityPower * (n - b))) / GravityPower;
-                float vx = (a - A) / JampTime;
-
-                
-                moveDirection.x = vx;
-                moveDirection.y = vy;
-            }
-        }
-		else if (controller.isGrounded)
+		if (controller.isGrounded)
 		{
-			moveDirection.x = 0;
-			moveDirection.y = groundSpeed;
+			if (Input.GetMouseButton(0))
+			{
+				Jamp();
+			}
+			else
+			{
+				moveDirection.x = 0;
+				moveDirection.y = groundSpeed;
+			}
 		}
-
-		if (groundSpeed == 0)
+		else
 		{
 			moveDirection.y -= GravityPower * Time.deltaTime;
 		}
+
         controller.Move(moveDirection * Time.deltaTime);
-		
-		
 
 
         Debug.Log(moveDirection);
@@ -83,6 +65,25 @@ public class MainCubeBehaver : MonoBehaviour {
 			groundSpeed = 0;
 			//Debug.Log("Gronud");
 		}
+	}
+
+	void Jamp()
+	{
+		float A = transform.position.x;
+		float B = transform.position.y - transform.localScale.y / 4;
+		float a = t.x;
+		float b = t.y;
+
+		//float m = (A + a) / 2;
+		float n = Mathf.Max(B, b) + 2f;
+
+		float vy = Mathf.Sqrt((n - B) * 2 * GravityPower);
+		JampTime = (vy + Mathf.Sqrt(2 * GravityPower * (n - b))) / GravityPower;
+		float vx = (a - A) / JampTime;
+
+
+		moveDirection.x = vx;
+		moveDirection.y = vy;
 	}
 }
 
