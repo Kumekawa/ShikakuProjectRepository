@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallingCubeBehaver : MonoBehaviour
 {
 
-	public float MoveSpeed;
+	public static float MoveSpeed;
 	public GameObject Camera;
 	//public Vector3 CameraPosition;
 	//public Camera Camera;
@@ -94,4 +94,5 @@ public class FallingCubeBehaver : MonoBehaviour
 		}
 		return false;
 	}
+	
 }

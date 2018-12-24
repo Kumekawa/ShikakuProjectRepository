@@ -54,9 +54,9 @@ public class MainCubeBehaver : MonoBehaviour {
 
         moveDirection.y -= GravityPower * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-
-
-        if (controller.isGrounded)
+		
+		
+		if (controller.isGrounded)
         {
             moveDirection.x = 0;
             moveDirection.y = 0;
